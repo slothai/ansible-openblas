@@ -1,0 +1,6 @@
+---
+galaxy_info:
+  author: Kirill Pavlov <k@p99.io>
+  description: OpenBLAS installation from source
+  license: MIT
+  categories: system
