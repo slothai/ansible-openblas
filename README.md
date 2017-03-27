@@ -1,6 +1,10 @@
+# Ansible OpenBLAS installation from source
+
+Requires ansible 2.0+. No dependencies.
+
 #### Variables
 
 ```yaml
 openblas_path: /opt/OpenBLAS
-opneblas_version: v0.2.19
+openblas_version: 0.2.19
 ```

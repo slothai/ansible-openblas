@@ -1,17 +1,22 @@
 ---
-- name: Install OpenBLAS from source - copy from github
-  git:
-    repo: https://github.com/xianyi/OpenBLAS
-    dest: /tmp/OpenBLAS
-    version: "{{opneblas_version}}"
-    update: no
+- name: Install OpenBLAS dependencies gfortran
+  package:
+    name: gfortran
+    state: present
 
 - stat:
-    path: /opt/OpenBLAS/include/openblas_config.h
+    path: "{{openblas_path}}/include/openblas_config.h"
   register: openblas_installed
 
-- name: Install OpenBLAS from source - install is does not exist
-  command: chdir=/tmp/OpenBLAS "{{ item }}"
+- name: Download and unarhive OpenBLAS tarball from GitHub
+  unarchive:
+    src: "https://github.com/xianyi/OpenBLAS/archive/v{{openblas_version}}.tar.gz"
+    dest: "/tmp/"
+    remote_src: yes
+  when: openblas_installed.stat.exists == False
+
+- name: Install OpenBLAS
+  command: "{{item}} chdir=/tmp/OpenBLAS-{{openblas_version}}"
   with_items:
     - make FC=gfortran
     - make PREFIX="{{openblas_path}}" install
