@@ -13,11 +13,12 @@
     src: "https://github.com/xianyi/OpenBLAS/archive/v{{openblas_version}}.tar.gz"
     dest: "/tmp/"
     remote_src: yes
+    copy: no
   when: openblas_installed.stat.exists == False
 
 - name: Install OpenBLAS
   command: "{{item}} chdir=/tmp/OpenBLAS-{{openblas_version}}"
   with_items:
-    - make FC=gfortran
+    - make FC=gfortran NO_AFFINITY={{openblas_no_affinity}} USE_OPENMP={{ openblas_use_openmp if openblas_use_openmp is defined else 1 if ansible_processor_vcpus > 1 else 0}} OMP_NUM_THREADS={{ansible_processor_vcpus}}
     - make PREFIX="{{openblas_path}}" install
   when: openblas_installed.stat.exists == False

@@ -1,3 +1,6 @@
 ---
 openblas_path: /opt/OpenBLAS
 openblas_version: 0.2.19
+openblas_no_affinity: 1  # NO_AFFINITY=1 flag
+# Uncomment line below to set USE_OPENMP. Its enabled for multi-core systems.
+# openblas_use_openmp: 1

@@ -9,6 +9,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "ubuntu/trusty64"
 
+  # Check OpenBLAS with 1 and 2+ cpus.
+  config.vm.provider :virtualbox do |vb|
+    vb.cpus = "2"
+  end
+
   config.vm.provision :ansible do |ansible|
     ansible.playbook = "test.yml"
     ansible.sudo = true
