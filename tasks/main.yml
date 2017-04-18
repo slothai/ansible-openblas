@@ -1,8 +1,9 @@
 ---
-- name: Install OpenBLAS dependencies gfortran
-  package:
-    name: gfortran
-    state: present
+- name: Install OpenBLAS dependencies make, gfortran
+  package: name="{{item}}" state=present
+  with_items:
+    - make
+    - gfortran
 
 - stat:
     path: "{{openblas_path}}/include/openblas_config.h"
