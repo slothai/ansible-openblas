@@ -13,8 +13,7 @@
   unarchive:
     src: "https://github.com/xianyi/OpenBLAS/archive/v{{openblas_version}}.tar.gz"
     dest: "/tmp/"
-    remote_src: yes
-    copy: no
+    remote_src: True
   when: openblas_installed.stat.exists == False
 
 - name: Install OpenBLAS
