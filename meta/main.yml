@@ -2,7 +2,7 @@
 galaxy_info:
   author: Kirill Pavlov <k@p99.io>
   description: OpenBLAS installation from source
-  min_ansible_version: 2.0
+  min_ansible_version: 2.2
   license: MIT
   platforms:
   - name: Ubuntu
